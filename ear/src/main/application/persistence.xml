@@ -1,0 +1,82 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?> -->
+<!-- <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" -->
+<!--         http://xmlns.jcp.org/xml/ns/persistence -->
+<!--         http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"> -->
+
+<!--     <persistence-unit name="qbenPU" transaction-type="JTA"> -->
+<!--         <jta-data-source>java:/jboss/datasources/qdbsDS</jta-data-source> -->
+<!--         <shared-cache-mode>ALL</shared-cache-mode> -->
+
+<!--         <class>de.akdb.zsys.benutzerverwaltung.authentifizierung.verwaltung.entity.BenutzerLDAP</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.authentifizierung.verwaltung.entity.BenutzerIntern</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.authentifizierung.verwaltung.entity.BenutzerExtern</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.authentifizierung.verwaltung.entity.Mandant</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.authentifizierung.verwaltung.entity.PasswordHistory</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.authentifizierung.verwaltung.entity.PasswordPolicy</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.authentifizierung.organisation.entity.Benutzer</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.authentifizierung.organisation.entity.Gruppe</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.authentifizierung.organisation.entity.Vertretung</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.authentifizierung.konfiguration.entity.ExterneBVKonfiguration</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.authentifizierung.konfiguration.entity.KonfigurationLDAP</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.authentifizierung.konfiguration.entity.KonfigurationSAML</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.authentifizierung.login.entity.PersistentSession</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.autorisierung.verwaltung.entity.FunktionsSchutzObjekt</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.autorisierung.verwaltung.entity.DatenSchutzObjekt</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.autorisierung.verwaltung.entity.AuswertungsSchutzObjekt</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.autorisierung.verwaltung.entity.Randbedingung</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.autorisierung.verwaltung.entity.RandbedingungGrundlage</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.autorisierung.verwaltung.entity.Recht</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.autorisierung.verwaltung.entity.Rollendefinition</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.autorisierung.verwaltung.entity.Rolleninstanz</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.autorisierung.verwaltung.entity.InterneRolleninstanz</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.autorisierung.verwaltung.entity.SchutzObjekt</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.autorisierung.verwaltung.entity.Verfahren</class> -->
+<!--         <class>de.akdb.zsys.benutzerverwaltung.autorisierung.verwaltung.entity.Zugriffsberechtigter</class> -->
+
+<!--         <properties> -->
+<!--             <property name="hibernate.show_sql" value="true" /> -->
+<!--             <property name="hibernate.use_sql_comments" value="true" /> -->
+
+<!--             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" /> -->
+
+<!--             <property name="hibernate.cache.use_second_level_cache" value="true" /> -->
+<!--             <property name="hibernate.cache.use_query_cache" value="true" /> -->
+<!--             <property name="hibernate.generate_statistics" value="true" /> -->
+<!--             <property name="hibernate.cache.region.factory_class" value="org.jboss.as.jpa.hibernate5.infinispan.InfinispanRegionFactory" /> -->
+<!--             <property name="hibernate.generate_statistics" value="true" /> -->
+<!--         </properties> -->
+<!--     </persistence-unit> -->
+
+<!--     <persistence-unit name="qbenQjouPU" transaction-type="JTA"> -->
+<!--         <jta-data-source>java:/jboss/datasources/qdbsDS</jta-data-source> -->
+<!--         <shared-cache-mode>ALL</shared-cache-mode> -->
+
+<!--         <class>de.akdb.zsys.journal.archiv.entity.ArchivDateneintrag</class> -->
+<!--         <class>de.akdb.zsys.journal.archiv.entity.ArchivHistorisierungseintrag</class> -->
+<!--         <class>de.akdb.zsys.journal.archiv.entity.ArchivJournalisierungseintrag</class> -->
+<!--         <class>de.akdb.zsys.journal.archiv.entity.ArchivSucheintrag</class> -->
+<!--         <class>de.akdb.zsys.journal.mapping.entity.Attributzuordnung</class> -->
+<!--         <class>de.akdb.zsys.journal.journalisierung.entity.Dateneintrag</class> -->
+<!--         <class>de.akdb.zsys.journal.mapping.entity.Entitaet</class> -->
+<!--         <class>de.akdb.zsys.journal.journalisierung.entity.Historisierungseintrag</class> -->
+<!--         <class>de.akdb.zsys.journal.journalisierung.entity.Journalisierungseintrag</class> -->
+<!--         <class>de.akdb.zsys.journal.utils.entity.QJOUKonfiguration</class> -->
+<!--         <class>de.akdb.zsys.journal.journalisierung.entity.Sucheintrag</class> -->
+<!--         <class>de.akdb.zsys.journal.mapping.entity.Verfahrensmapping</class> -->
+<!--         <class>de.akdb.zsys.journal.utils.entity.QJOUMandanten</class> -->
+<!--         <class>de.akdb.zsys.journal.utils.entity.QJOUVerfahren</class> -->
+
+<!--         <properties> -->
+<!--             <property name="hibernate.show_sql" value="true" /> -->
+<!--             <property name="hibernate.use_sql_comments" value="true" /> -->
+
+<!--             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" /> -->
+
+<!--             <property name="hibernate.cache.use_second_level_cache" value="true" /> -->
+<!--             <property name="hibernate.cache.use_query_cache" value="true" /> -->
+<!--             <property name="hibernate.generate_statistics" value="true" /> -->
+<!--             <property name="hibernate.cache.region.factory_class" value="org.jboss.as.jpa.hibernate5.infinispan.InfinispanRegionFactory" /> -->
+<!--             <property name="hibernate.generate_statistics" value="true" /> -->
+<!--         </properties> -->
+<!--     </persistence-unit> -->
+<!-- </persistence> -->

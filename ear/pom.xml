@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JBoss, Home of Professional Open Source Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual contributors by the @authors tag. See the copyright.txt in the distribution for a full listing of individual contributors. Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. -->
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>secured-ws-poc</artifactId>
+        <groupId>org.jboss.eap.example.security</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>secured-ws-poc-ear</artifactId>
+    <packaging>ear</packaging>
+
+    <name>secured-ws-poc - ear</name>
+
+    <url>http://jboss.org/jbossas</url>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <distribution>repo</distribution>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
+
+    <dependencies>
+
+        <!-- Depend on the ejb module and war so that we can package them -->
+        <dependency>
+            <groupId>org.jboss.eap.example.security</groupId>
+            <artifactId>secured-ws-poc-web</artifactId>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.eap.example.security</groupId>
+            <artifactId>secured-ws-poc-ejb</artifactId>
+            <type>ejb</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.eap.example.security</groupId>
+            <artifactId>secured-ws-poc-commons</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>${version.ear.plugin}</version>
+                <configuration>
+                    <!-- Tell Maven we are using Java EE 6 -->
+                    <version>6</version>
+                    <!-- Use Java EE ear libraries as needed. Java EE ear libraries are in easy way to package any libraries needed in the ear, and automatically have any modules (EJB-JARs and WARs) use them -->
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <modules>
+                        <ejbModule>
+                            <groupId>org.jboss.eap.example.security</groupId>
+                            <artifactId>secured-ws-poc-ejb</artifactId>
+                        </ejbModule>
+                        <!-- Default context root of the web app is /secured-ws-poc-web. If a custom context root is needed, uncomment the following snippet to register our War as a web module and set the contextRoot property -->
+                        <webModule>
+                            <groupId>org.jboss.eap.example.security</groupId>
+                            <artifactId>secured-ws-poc-web</artifactId>
+                            <contextRoot>/securedws</contextRoot>
+                        </webModule>
+                    </modules>
+                    <archive>
+                        <manifestEntries>
+                            <Dependencies>javax.persistence.api export,de.akdb.security.loginmodule.qben export,org.jboss.logging export</Dependencies>
+                        </manifestEntries>
+                    </archive>
+                    <fileNameMapping>no-version</fileNameMapping>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.0.2.Final</version>
+
+                <configuration>
+                    <!-- Execute CLI commads -->
+<!--                     <commands> -->
+<!--                         <command>/subsystem=logging/file-handler=debug:add(level=DEBUG,autoflush=true,file={"relative-to"=>"jboss.server.log.dir", "path"=>"debug.log"})</command> -->
+<!--                         <command>/subsystem=logging/logger=org.jboss.as:add(level=DEBUG,handlers=[debug])</command> -->
+<!--                     </commands> -->
+                    <!-- run a server with multiple module paths: -->
+<!--                     <modules-path> -->
+<!--                         <paths> -->
+<!--                             <path>/opt/WildFly/modules</path> -->
+<!--                             <path>/opt/my-modules</path> -->
+<!--                         </paths> -->
+<!--                     </modules-path> -->
+                    <!-- Add a user -->
+<!--                     <add-user> -->
+<!--                         <users> -->
+<!--                             <user> -->
+<!--                                 <username>admin</username> -->
+<!--                                 <password>admin.1234</password> -->
+<!--                             </user> -->
+<!--                             <user> -->
+<!--                                 <username>admin-user</username> -->
+<!--                                 <password>user.1234</password> -->
+<!--                                 <groups> -->
+<!--                                     <group>admin</group> -->
+<!--                                     <group>user</group> -->
+<!--                                 </groups> -->
+<!--                                 <application-user>true</application-user> -->
+<!--                             </user> -->
+<!--                             <user> -->
+<!--                                 <username>default-user</username> -->
+<!--                                 <password>user.1234</password> -->
+<!--                                 <groups> -->
+<!--                                     <group>user</group> -->
+<!--                                 </groups> -->
+<!--                                 <application-user>true</application-user> -->
+<!--                             </user> -->
+<!--                         </users> -->
+<!--                     </add-user> -->
+                    <!-- Enable debug mode -->
+<!--                     <java-opts> -->
+<!--                         <java-opt>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005</java-opt> -->
+<!--                     </java-opts> -->
+
+                </configuration>
+
+
+                <executions>
+                    <!-- Undeploy the application on clean -->
+                    <execution>
+                        <id>undeploy</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>undeploy</goal>
+                        </goals>
+                        <configuration>
+                            <ignoreMissingDeployment>true</ignoreMissingDeployment>
+                        </configuration>
+                    </execution>
+
+                    <!-- Deploy the JDBC library -->
+                    <!-- <execution> -->
+                    <!-- <id>deploy-driver</id> -->
+                    <!-- <phase>install</phase> -->
+                    <!-- <configuration> -->
+                    <!-- <groupId>postgresql</groupId> -->
+                    <!-- <artifactId>postgresql</artifactId> -->
+                    <!-- <name>postgresql.jar</name> -->
+                    <!-- </configuration> -->
+                    <!-- <goals> -->
+                    <!-- <goal>deploy-artifact</goal> -->
+                    <!-- </goals> -->
+                    <!-- </execution> -->
+
+                    <!-- Add a data source -->
+                    <!-- <execution> -->
+                    <!-- <id>add-datasource</id> -->
+                    <!-- <phase>install</phase> -->
+                    <!-- <configuration> -->
+                    <!-- <address>subsystem=datasources,data-source=myDatasource</address> -->
+                    <!-- <resources> -->
+                    <!-- <resource> -->
+                    <!-- <enableResource>true</enableResource> -->
+                    <!-- <properties> -->
+                    <!-- <connection-url>jdbc:postgresql://localhost/myDatabase</connection-url> -->
+                    <!-- <jndi-name>java:jboss/myDatasource</jndi-name> -->
+                    <!-- <enabled>true</enabled> -->
+                    <!-- <enable>true</enable> -->
+                    <!-- <user-name>dbuser</user-name> -->
+                    <!-- <password>supersecret</password> -->
+                    <!-- <driver-name>postgresql.jar</driver-name> -->
+                    <!-- <use-ccm>false</use-ccm> -->
+                    <!-- </properties> -->
+                    <!-- </resource> -->
+                    <!-- </resources> -->
+                    <!-- </configuration> -->
+                    <!-- <goals> -->
+                    <!-- <goal>add-resource</goal> -->
+                    <!-- </goals> -->
+                    <!-- </execution> -->
+
+
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- <profiles> -->
+    <!-- <profile> -->
+    <!-- <id>openshift</id> -->
+    <!-- <build> -->
+    <!-- <plugins> -->
+    <!-- <plugin> -->
+    <!-- <artifactId>maven-ear-plugin</artifactId> -->
+    <!-- <version>${version.ear.plugin}</version> -->
+    <!-- <configuration> -->
+    <!-- <outputDirectory>deployments</outputDirectory> -->
+    <!-- </configuration> -->
+    <!-- </plugin> -->
+    <!-- </plugins> -->
+    <!-- </build> -->
+    <!-- </profile> -->
+    <!-- </profiles> -->
+
+</project>

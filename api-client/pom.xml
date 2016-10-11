@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.jboss.eap.example.security</groupId>
+        <artifactId>secured-ws-poc</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>secured-ws-api-client</artifactId>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jvnet.jax-ws-commons</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <!-- Following configuration will invoke wsimport once for each wsdl. -->
+                        <configuration>
+                            <sourceDestDir>${project.basedir}/src/main/java</sourceDestDir>
+                            <wsdlUrls>
+                                <wsdlUrl>http://localhost:8080/securedws/HelloService?wsdl</wsdlUrl>
+                            </wsdlUrls>
+                            <extension>true</extension>
+                            <vmArgs>
+                                <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
+                            </vmArgs>
+                        </configuration>
+                    </execution>
+                </executions>
+
+                <!-- if you want to use a specific version of JAX-WS, you can do so like this -->
+                <dependencies>
+                    <dependency>
+                        <groupId>com.sun.xml.ws</groupId>
+                        <artifactId>jaxws-tools</artifactId>
+                        <version>2.2.10</version>
+                    </dependency>
+                    <!-- <dependency> -->
+                    <!-- <groupId>com.sun.xml.ws</groupId> -->
+                    <!-- <artifactId>jaxws-rt</artifactId> -->
+                    <!-- <version>2.2.8</version> -->
+                    <!-- </dependency> -->
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>

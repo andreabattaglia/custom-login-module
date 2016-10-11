@@ -1,0 +1,9 @@
+<security-domain name="myloginmodule" cache-type="default">
+    <authentication>
+        <login-module code="org.jboss.eap.example.security.loginmodule.CustomLoginModule" flag="required" module="org.jboss.eap.example.security.loginmodule">
+            <module-option name="principalClass" value="org.jboss.eap.example.security.loginmodule.CustomPrincipal"/>
+            <module-option name="usersProperties" value="${jboss.server.config.dir}/users.properties"/>
+            <module-option name="rolesProperties" value="${jboss.server.config.dir}/roles.properties"/>
+        </login-module>
+    </authentication>
+</security-domain>
