@@ -9,9 +9,9 @@
     <artifactId>secured-ws-api-client-test</artifactId>
     <dependencies>
         <dependency>
-    <groupId>org.jboss.eap.example.security</groupId>
+            <groupId>org.jboss.eap.example.security</groupId>
             <artifactId>secured-ws-api-client</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.1-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -23,8 +23,18 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.eap.example.soap.client</groupId>
+            <artifactId>soap-invocation-handler</artifactId>
+            <scope>test</scope>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
